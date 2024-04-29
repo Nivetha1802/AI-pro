@@ -1,21 +1,27 @@
+<div class="header-container">
+  <h1 class="heading">Decept</h1>
+</div>
+<div class="main">
 <div class="content" role="main">
-
-    <div class="row justify-content-center pt-2 pb-2">
-      <button title="Click here to start recording action" class="btn-mic w-auto" (click)="startRecording()"
-        *ngIf="!isRecording" style="margin-right: 3px;">
-        <i class="fa-solid fa-microphone"></i>
+  <div class="row justify-content-center pt-2 pb-2">
+      <button title="Click here to start recording action" class="btn" (click)="startRecording()"
+          *ngIf="!isRecording" style="margin-right: 3px;">
+          <span class="material-symbols-outlined">
+            mic
+          </span>
       </button>
-      <button title="Click here to stop recording" class="btn-stop w-auto" (click)="stopRecording()" *ngIf="isRecording"
-        style="margin-right: 3px;">
-        <i class="fa-solid fa-microphone"></i>
+      <button title="Click here to stop recording" class="btn" (click)="stopRecording()" *ngIf="isRecording"
+          style="margin-right: 3px;">
+          <span class="material-symbols-outlined">
+            mic
+          </span>
       </button>
-    </div>
-    <audio #audioPlayer controls style="margin: 10px;"></audio>
-    <a *ngIf="recordedAudioBlob" [href]="recordedAudioUrl" download="recorded_audio.wav">Download last recorded Audio</a>
   </div>
-  
+  <audio #audioPlayer controls style="margin: 10px;"></audio>
+  <!-- <a *ngIf="recordedAudioBlob" [href]="recordedAudioUrl" download="recorded_audio.wav">Download last recorded Audio</a> -->
+<div class="detect"><button (click)="handleButtonClick($event)">Detect</button></div>
 
-  <div>
-    <h2>Transcription Response:</h2>
-    <p>{{ this.str }}</p>
-  </div>
+<div class = "result">
+  <h2>Result:{{ this.str }}</h2>
+</div>
+</div>

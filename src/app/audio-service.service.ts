@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { bufferToWave } from '../app/audio/audio-helper';
 import { HttpClient } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -34,11 +35,15 @@ export class AudioServiceService {
         const wavBlob = bufferToWave(audioBuffer, audioBuffer.length);
         this.audioBlobSubject.next(wavBlob);
         this.chunks = [];
+        
       };
+    
   
       this.mediaRecorder.stop();
     }
   }
+
+  
    transcribeAudio(audioFile: File): Promise<any> {
     const formData = new FormData();
     formData.append('audio', audioFile);

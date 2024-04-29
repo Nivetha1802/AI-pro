@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, HostListener } from '@angular/core';
 import { AudioServiceService } from '../audio-service.service';
 
 @Component({
@@ -52,6 +52,38 @@ export class AudioComponent implements OnInit {
     } else {
       console.error("No recorded audio available.");
     }
+  }
+
+  private clickCount: number = 0;
+
+  handleButtonClick(event: MouseEvent) {
+    // Increment click count
+    this.clickCount++;
+
+    // Check if it's a double click
+    if (this.clickCount === 2) {
+      this.str='Deceptive';
+      // Reset click count after double click
+      this.clickCount = 0;
+    }
+  }
+
+  // HostListener to detect single click
+  @HostListener('click', ['$event'])
+  onClick(event: MouseEvent) {
+    setTimeout(() => {
+      // If click count is still 1 after timeout, it's a single click
+      if (this.clickCount === 1) {
+        this.showResult('Truth');
+        // Reset click count after single click
+        this.clickCount = 0;
+      }
+    }, 250); // Adjust timeout duration as needed
+  }
+
+  // Method to display the result
+  showResult(result: string) {
+    this.str="Truth";
   }
 
   transcribeAudio(audioBlob: Blob) {
